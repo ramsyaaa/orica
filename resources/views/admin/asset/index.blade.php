@@ -54,7 +54,29 @@
 												<thead>
 													<tr>
 														<th>#</th>
-														<th>Asset Name</th><th>Asset Description</th><th>Balance Sheet Account</th><th>Balance Sheet Account Description</th><th>Asset Number</th><th>Asset Subnumber</th><th>Asset Class Number</th><th>Asset Class</th><th>Asset Cost Center Number</th><th>Asset Cost Center</th><th>Location Id</th><th>First Acquisition Period</th><th>Capitalized On</th><th>Dep Start Date</th><th>Planned Useful Life</th><th>Apc Reporting Date Planned</th><th>Ordinary Depreciation Reporting Date Posted</th><th>Unplanned Depreciation Reporting Date Posted</th><th>Netbook Value Reporting Date Planned</th><th>Last Verification Date</th>
+														<th>Qrcode</th>
+														<th>Barcode</th>
+														<th>Image</th>
+														<th>Asset Name</th>
+														<th>Asset Description</th>
+														<th>Balance Sheet Account</th>
+														<th>Balance Sheet Account Description</th>
+														<th>Asset Number</th>
+														<th>Asset Subnumber</th>
+														<th>Asset Class Number</th>
+														<th>Asset Class</th>
+														<th>Asset Cost Center Number</th>
+														<th>Asset Cost Center</th>
+														<th>Location Id</th>
+														<th>First Acquisition Period</th>
+														<th>Capitalized On</th>
+														<th>Dep Start Date</th>
+														<th>Planned Useful Life</th>
+														<th>Apc Reporting Date Planned</th>
+														<th>Ordinary Depreciation Reporting Date Posted</th>
+														<th>Unplanned Depreciation Reporting Date Posted</th>
+														<th>Netbook Value Reporting Date Planned</th>
+														<th>Last Verification Date</th>
 														<th>Actions</th>
 													</tr>
 												</thead>
@@ -62,14 +84,36 @@
                           						@foreach($asset as $i => $item)
 													<tr>
 														<td>{{ $i+1 }}</td>
-                            							<td>{{ $item->asset_name }}</td><td>{{ $item->asset_description }}</td><td>{{ $item->balance_sheet_account }}</td><td>{{ $item->balance_sheet_account_description }}</td><td>{{ $item->asset_number }}</td><td>{{ $item->asset_subnumber }}</td><td>{{ $item->asset_class_number }}</td><td>{{ $item->asset_class }}</td><td>{{ $item->asset_cost_center_number }}</td><td>{{ $item->asset_cost_center }}</td><td>{{ $item->location_id }}</td><td>{{ $item->first_acquisition_period }}</td><td>{{ $item->capitalized_on }}</td><td>{{ $item->dep_start_date }}</td><td>{{ $item->planned_useful_life }}</td><td>{{ $item->apc_reporting_date_planned }}</td><td>{{ $item->ordinary_depreciation_reporting_date_posted }}</td><td>{{ $item->unplanned_depreciation_reporting_date_posted }}</td><td>{{ $item->netbook_value_reporting_date_planned }}</td><td>{{ $item->last_verification_date }}</td>
+														<td>{!! $item->qrcode!!}</td>
+														<td>{!! $item->barcode!!}</td>
+														<td><img src="{{asset('uploads/images/'.$item->image)}}" alt="Gambar {{$item->asset_name}}"></td>
+                            							<td>{{ $item->asset_name }}</td>
+														<td>{{ $item->asset_description }}</td>
+														<td>{{ $item->balance_sheet_account }}</td>
+														<td>{{ $item->balance_sheet_account_description }}</td>
+														<td>{{ $item->asset_number }}</td>
+														<td>{{ $item->asset_subnumber }}</td>
+														<td>{{ $item->asset_class_number }}</td>
+														<td>{{ $item->asset_class }}</td>
+														<td>{{ $item->asset_cost_center_number }}</td>
+														<td>{{ $item->asset_cost_center }}</td>
+														<td>{{ $item->location_id }}</td>
+														<td>{{ $item->first_acquisition_period }}</td>
+														<td>{{ $item->capitalized_on }}</td>
+														<td>{{ $item->dep_start_date }}</td>
+														<td>{{ $item->planned_useful_life }}</td>
+														<td>{{ $item->apc_reporting_date_planned }}</td>
+														<td>{{ $item->ordinary_depreciation_reporting_date_posted }}</td>
+														<td>{{ $item->unplanned_depreciation_reporting_date_posted }}</td>
+														<td>{{ $item->netbook_value_reporting_date_planned }}</td>
+														<td>{{ $item->last_verification_date }}</td>
 														<td class="text-right" align="center">
 															<div class="table-action">
 															<a href="{{ url('/admin/asset/' . $item->id) }}" title="View Asset"><button class="btn btn-sm btn-info"><span class="lnr lnr-eye"></span>View</button></a>
 															<a href="{{ url('/admin/asset/' . $item->id . '/edit') }}" title="Edit Asset"><button class="btn btn-sm btn-primary"><span class="lnr lnr-eye"></span>Edit</button></a>
 															<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteConfirm{{$item->id}}"><span class="lnr lnr-trash">Delete</span></button>
 															<div class="modal fade" id="deleteConfirm{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-																<div class="modal-dialog modal-sm">
+																<div class="modal-dialog modal-xl">
 																	<div class="modal-content">
 																		<div class="modal-header">
 																			<h4 class="modal-title" id="myModalLabel">Delete Confirmation</h4>
@@ -111,7 +155,7 @@
 			</div>
 			<!--/Content-->
         <div class="modal fade" id="add-Asset" role="document">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <!-- Modal body -->
                     <div class="modal-body style-add-modal">

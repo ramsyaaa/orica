@@ -24,4 +24,5 @@ Route::get('/logout', 'Auth\AuthController@logout')->name('logoutUser');
 Route::get('admin', 'Admin\AdminController@index');
 Route::resource('admin/location', 'Admin\\LocationController');
 Route::resource('admin/asset', 'Admin\\AssetController');
+Route::get('admin/asset/{id}', 'Admin\AssetController@showAsset')->name('showAsset');
 Route::resource('admin/asset-history', 'Admin\\AssetHistoryController');

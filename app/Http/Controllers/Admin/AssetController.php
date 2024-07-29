@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Alert;
 use App\Models\Asset;
+use App\Http\Requests;
 use App\Models\Location;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Picqer\Barcode\BarcodeGeneratorPNG;
+use Picqer\Barcode\BarcodeGeneratorHTML;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class AssetController extends Controller
 {
@@ -30,6 +33,16 @@ class AssetController extends Controller
     {
         $perPage = 25;
         $asset = Asset::latest()->paginate($perPage);
+
+        $modifieds = $asset->map(function($item){
+            $generator = new BarcodeGeneratorPNG;
+            $item->barcode = '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($item->id, $generator::TYPE_CODE_128)) . '">';
+            $item->qrcode = QrCode::size(100)->generate(route('showAsset',['id' => $item->id]));
+            return $item;
+
+        });
+
+        $asset->setCollection($modifieds);
         $location = Location::pluck('location_name', 'id');
         $data['location'] = $location;
         $data['asset'] = $asset;
@@ -55,13 +68,28 @@ class AssetController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $requestData = $request->all();
-        
-        Asset::create($requestData);
-        alert()->success('New ' . 'Asset'. ' Created!' );
-
-        return redirect('admin/asset');
+        try {
+            $requestData = $request->all();
+            if($request->hasFile('image'))
+            {
+                $this->validate($request, [
+                    'image' => 'image|mimes:png,jpeg,jpg,svg|max:4096'
+                ]);
+    
+                $file= $request->file('image');
+                $image_name = $file->getClientOriginalName();
+                $file->move(public_path('uploads/images/'),$image_name);
+                $requestData['image'] = $image_name;
+            }
+            
+            Asset::create($requestData);
+            alert()->success('New ' . 'Asset'. ' Created!' );
+    
+            return redirect('admin/asset');
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+     
     }
 
     /**
@@ -106,8 +134,24 @@ class AssetController extends Controller
     {
         
         $requestData = $request->all();
-        
         $asset = Asset::findOrFail($id);
+
+        if($request->hasFile('image'))
+        {
+            $this->validate($request, [
+                'image' => 'image|mimes:png,jpeg,jpg,svg|max:4096'
+            ]);
+            $file= $request->file('image');
+            $image_name = $file->getClientOriginalName();
+            if($asset->image){
+                unlink(public_path('uploads/images/'.$asset->image));
+                $file->move(public_path('uploads/images/'),$image_name);
+            }else{
+                $file->move(public_path('uploads/images/'),$image_name);
+            }
+            $requestData['image'] = $image_name;
+        }
+
         alert()->success('Record Updated!' );
         $asset->update($requestData);
 
@@ -127,5 +171,12 @@ class AssetController extends Controller
         Asset::destroy($id);
 
         return redirect('admin/asset');
+    }
+
+    public function showAsset($id){
+
+        $asset = Asset::findOrFail($id);
+
+        return view('admin.asset.show-asset', compact('asset'));
     }
 }

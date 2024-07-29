@@ -29,7 +29,7 @@ class Asset extends Model
      *
      * @var array
      */
-    protected $fillable = ['asset_name', 'asset_description', 'balance_sheet_account', 'balance_sheet_account_description', 'asset_number', 'asset_subnumber', 'asset_class_number', 'asset_class', 'asset_cost_center_number', 'asset_cost_center', 'location_id', 'first_acquisition_period', 'capitalized_on', 'dep_start_date', 'planned_useful_life', 'apc_reporting_date_planned', 'ordinary_depreciation_reporting_date_posted', 'unplanned_depreciation_reporting_date_posted', 'netbook_value_reporting_date_planned', 'last_verification_date'];
+    protected $fillable = ['asset_name', 'asset_description', 'balance_sheet_account', 'balance_sheet_account_description', 'asset_number', 'asset_subnumber', 'asset_class_number', 'asset_class', 'asset_cost_center_number', 'asset_cost_center', 'location_id', 'first_acquisition_period', 'capitalized_on', 'dep_start_date', 'planned_useful_life', 'apc_reporting_date_planned', 'ordinary_depreciation_reporting_date_posted', 'unplanned_depreciation_reporting_date_posted', 'netbook_value_reporting_date_planned', 'last_verification_date','image','remember_token'];
 
     
 

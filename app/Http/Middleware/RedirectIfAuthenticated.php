@@ -21,6 +21,10 @@ class RedirectIfAuthenticated
             return redirect('/admin/dashboard');
         }
 
+        if ($request->isMethod('get') && !$request->expectsJson()) {
+            session(['url.intended' => url()->previous()]);
+        }
+
         return $next($request);
     }
 }

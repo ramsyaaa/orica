@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use Alert;
-use App\User; // Assuming your model is in the App\Models namespace
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
+use App\User; // Assuming your model is in the App\Models namespace
 
 class AuthController extends Controller
 {
@@ -25,8 +26,11 @@ class AuthController extends Controller
 
         $user = User::where('email', $email)->first();
         if ($user && \Hash::check($password, $user->password)) {
-            auth()->guard('web')->login($user);
+            auth()->guard('web')->login($user,true);
             session(["email" => $email]);
+            if (Session::has('url.intended')) {
+                return redirect()->intended(Session::pull('url.intended'));
+            }
             alert()->success('Login Success');
             return redirect('/admin');
         } else {
@@ -35,8 +39,8 @@ class AuthController extends Controller
         }
     }
 
-    public function logoutUser() {
-        Auth::logout();
+    public function logout() {
+        auth()->logout();
         alert()->success('Logout Success');
         return redirect('/auth/login');
     }

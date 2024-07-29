@@ -43,10 +43,8 @@
 											<table class="table custom-table table-hover table-hover">
                                                 <tbody>
                                                     <tr>
-                                                        <th>Image</th>
-                                                        <th>
-															<img src="{{asset('uploads/images/'.$asset->image)}}" alt="" style="width: 25%; height:25%">
-														</th>
+                                                        <th>ID</th>
+                                                        <th>{{ $asset->id }}</th>
                                                     </tr>
                                                     <tr>
 														<th> Asset Name </th>

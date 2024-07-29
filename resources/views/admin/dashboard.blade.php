@@ -33,13 +33,6 @@
 										</div>
 									</div>
 								</div>
-								<div class="quicklink-sidebar-menu ctm-border-radius shadow-sm bg-white card">
-									<div class="card-body">
-										<ul class="list-group">
-											<li class="list-group-item text-center active button-5"><a href="index.html" class="text-white">Admin Dashboard</a></li>
-										</ul>
-									</div>
-								</div>
 							</aside>
 						</div>
 						
@@ -47,54 +40,28 @@
 						
 							<!-- Widget -->
 							<div class="row">
-								<div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12">
-									<div class="card dash-widget ctm-border-radius shadow-sm">
-										<div class="card-body">
-											<div class="card-icon bg-primary">
-												<i class="fa fa-users" aria-hidden="true"></i>
-											</div>
-											<div class="card-right">
-												<h4 class="card-title">Employees</h4>
-												<p class="card-text">700</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-xl-3 col-lg-6 col-sm-6 col-12">
-									<div class="card dash-widget ctm-border-radius shadow-sm">
-										<div class="card-body">
-											<div class="card-icon bg-warning">
-												<i class="fa fa-building-o"></i>
-											</div>
-											<div class="card-right">
-												<h4 class="card-title">Companies</h4>
-												<p class="card-text">30</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-xl-3 col-lg-6 col-sm-6 col-12">
+								<div class="col-xl-6 col-lg-6 col-sm-6 col-12">
 									<div class="card dash-widget ctm-border-radius shadow-sm">
 										<div class="card-body">
 											<div class="card-icon bg-danger">
 												<i class="fa fa-suitcase" aria-hidden="true"></i>
 											</div>
 											<div class="card-right">
-												<h4 class="card-title">Leaves</h4>
-												<p class="card-text">3</p>
+												<h4 class="card-title">Asset</h4>
+												<p class="card-text">{{number_format($assets)}}</p>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="col-xl-3 col-lg-6 col-sm-6 col-12">
+								<div class="col-xl-6 col-lg-6 col-sm-6 col-12">
 									<div class="card dash-widget ctm-border-radius shadow-sm">
 										<div class="card-body">
 											<div class="card-icon bg-success">
-												<i class="fa fa-money" aria-hidden="true"></i>
+												<i class="fa fa-map-marker" aria-hidden="true"></i>
 											</div>
 											<div class="card-right">
-												<h4 class="card-title">Salary</h4>
-												<p class="card-text">$5.8M</p>
+												<h4 class="card-title">Location</h4>
+												<p class="card-text">{{number_format($locations)}}</p>
 											</div>
 										</div>
 									</div>
